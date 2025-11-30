@@ -1,0 +1,229 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Projects - Portfolio</title>  
+
+  <style>  
+    * {  
+      margin: 0;  
+      padding: 0;  
+      box-sizing: border-box;  
+      font-family: Arial, sans-serif;  
+    }  
+
+    body {  
+      background: linear-gradient(to right, #0f2027, #203a43, #2e5363);  
+      color: #fff;  
+      min-height: 100vh;  
+      padding: 30px;  
+      overflow-y: hidden;
+      transition: background 0.4s ease, color 0.4s ease;
+    }  
+
+   
+    .top-bar {  
+      display: flex;  
+      justify-content: space-between;  
+      align-items: center;  
+      margin-bottom: 30px;  
+    }  
+
+    .top-bar h1 {  
+      font-size: 28px;  
+      color: #1abc9c;  
+    }  
+
+    .top-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .add-btn {  
+      background: #1abc9c;  
+      border: none;  
+      padding: 10px 20px;  
+      border-radius: 25px;  
+      color: #fff;  
+      font-weight: bold;  
+      cursor: pointer;  
+      transition: 0.3s;  
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);  
+    }  
+
+    .add-btn:hover {  
+      background: #16a085;  
+      transform: scale(1.05);  
+      box-shadow: 0 6px 15px rgba(0,0,0,0.4);  
+    }  
+
+   
+    .toggle-btn {
+      width: 60px;
+      height: 30px;
+      border-radius: 20px;
+      background: #444;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .circle {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #1abc9c;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .dark .circle {
+      left: 32px;
+      background: #f1c40f;
+    }
+
+    body.dark {
+     background: linear-gradient(to right, #232526, #414345);
+      color: #ffffff;
+    }
+
+    
+    .projects-box {  
+      width: 100%;  
+      border-collapse: collapse;  
+      overflow: hidden;  
+      border-radius: 12px;  
+      box-shadow: 0 0 20px rgba(241, 237, 237, 0.4);  
+    }  
+
+    .projects-box th, .projects-box td {  
+      padding: 15px;  
+      text-align: left;  
+    }  
+
+    .projects-box th {  
+      background: rgba(26, 188, 156, 0.9);  
+      font-size: 18px;  
+    }  
+
+    .projects-box tr:nth-child(even) {  
+      background: rgba(228, 94, 94, 0.05);  
+    }  
+
+    .projects-box tr:nth-child(odd) {  
+      background: rgba(255,255,255,0.08);  
+    }  
+
+    .projects-box tr:hover {  
+      background: rgba(255, 255, 255, 0.15);  
+      transition: 0.3s;  
+    }  
+
+    .delete-btn {  
+      color: #e72d19;  
+      cursor: pointer;  
+      font-size: 18px;  
+      transition: 0.3s;  
+      display: inline-block;  
+    }  
+
+    .delete-btn:hover {  
+      color: #c0392b;  
+      transform: scale(1.2);  
+    }  
+  </style>  
+</head>  
+<body>  
+
+   
+  <div class="top-bar">  
+    <h1>My Projects</h1>  
+
+    <div class="top-right">
+      <button class="add-btn" id="addProject">➕ Add More Projects</button>  
+      <div class="toggle-btn" id="toggleBtn">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>  
+
+ 
+  <table class="projects-box" id="projectsTable">  
+    <tr>  
+      <th>Project Name</th>  
+      <th>Description</th>  
+      <th>Technology Used</th>  
+      <th>Actions</th>  
+    </tr>  
+    <tr>  
+      <td>Portfolio Slide</td>  
+      <td>My personal website</td>  
+      <td>HTML, CSS, JS</td>  
+      <td><span class="delete-btn">🗑</span></td>  
+    </tr>  
+    <tr>  
+      <td>Simple Task</td>  
+      <td>Single task manager</td>  
+      <td>HTML, CSS, JS</td>  
+      <td><span class="delete-btn">🗑</span></td>  
+    </tr>  
+    <tr>  
+      <td>To Do App</td>  
+      <td>Simple task manager</td>  
+      <td>HTML, CSS, JS</td>  
+      <td><span class="delete-btn">🗑</span></td>  
+    </tr>  
+    <tr>  
+      <td>Weather App</td>  
+      <td>Real time weather update</td>  
+      <td>HTML, CSS, JS, API</td>  
+      <td><span class="delete-btn">🗑</span></td>  
+    </tr>  
+    <tr>  
+      <td>Calculator App</td>  
+      <td>Perform basic Math operations</td>  
+      <td>HTML, CSS, JavaScript</td>  
+      <td><span class="delete-btn">🗑</span></td>  
+    </tr>  
+  </table>  
+
+  <script>  
+   
+    const table = document.getElementById("projectsTable");  
+    const addBtn = document.getElementById("addProject");  
+
+    addBtn.addEventListener("click", () => {  
+      let row = table.insertRow(-1);  
+      row.innerHTML = `  
+        <td contenteditable="true"></td>  
+        <td contenteditable="true"></td>  
+        <td contenteditable="true"></td>  
+        <td><span class="delete-btn">🗑</span></td>  
+      `;  
+      addDeleteFunctionality();  
+    });  
+
+    // 🔹 Delete row  
+    function addDeleteFunctionality() {  
+      const deleteBtns = document.querySelectorAll(".delete-btn");  
+      deleteBtns.forEach(btn => {  
+        btn.onclick = () => btn.parentElement.parentElement.remove();  
+      });  
+    }  
+
+    addDeleteFunctionality();  
+
+    // 🔹 Toggle Dark Mode  
+    const toggleBtn = document.getElementById("toggleBtn");
+    const body = document.body;
+
+    toggleBtn.addEventListener("click", () => {
+      body.classList.toggle("dark");
+    });
+  </script>  
+
+</body>  
+</html>
